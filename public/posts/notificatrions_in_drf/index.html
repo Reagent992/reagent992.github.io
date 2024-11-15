@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><script src="/Reagent992/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Reagent992/livereload" data-no-instant defer></script><title>How to create notifications in Django(DRF) by using the django-notifications-hq and django-dirtyfields libraries. &ndash; Personal page</title>
+<meta name="description" content="Python backend developer">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<link rel="stylesheet" href="http://localhost:1313/Reagent992/css/palettes/base16-dark.css">
+<link rel="stylesheet" href="http://localhost:1313/Reagent992/css/risotto.css">
+<link rel="stylesheet" href="http://localhost:1313/Reagent992/css/custom.css">
+
+
+
+
+
+
+
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+    <h1 class="page__logo"><a href="http://localhost:1313/Reagent992/" class="page__logo-inner">Personal page</a></h1>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="http://localhost:1313/Reagent992/cv/" title="cv">cv</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item active" href="http://localhost:1313/Reagent992/posts/" title="Posts">Posts</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>How to create notifications in Django(DRF) by using the django-notifications-hq and django-dirtyfields libraries.</h1>
+    </header>
+    <div class="content__body">
+        <hr>
+<p>links: <a href="https://github.com/django-notifications/django-notifications">django-notifications</a>, <a href="https://django-dirtyfields.readthedocs.io/en/stable/index.html">django-dirtyfields</a>, <a href="https://www.django-rest-framework.org/">drf</a></p>
+<hr>
+<blockquote>
+<p>Let’s imagine we are creating an API for a website where authors can publish their books. Our users can follow authors and they will be notified about every new book published by their favorite author.</p>
+</blockquote>
+<h1 id="installation">Installation</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># install libs</span>
+</span></span><span style="display:flex;"><span>pip install django<span style="color:#f92672">-</span>notifications<span style="color:#f92672">-</span>hq django<span style="color:#f92672">-</span>dirtyfields djangorestframework
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># settings.py</span>
+</span></span><span style="display:flex;"><span>INSTALLED_APPS <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;django.contrib.auth&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;rest_framework&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;notifications&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create notifications db table </span>
+</span></span><span style="display:flex;"><span>python manage<span style="color:#f92672">.</span>py migrate
+</span></span></code></pre></div><h1 id="models">Models</h1>
+<p>We have some default example models:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Author</span>(models<span style="color:#f92672">.</span>Model, DirtyFieldsMixin):
+</span></span><span style="display:flex;"><span>    first_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>    last_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span>(models<span style="color:#f92672">.</span>Model, DirtyFieldsMixin):
+</span></span><span style="display:flex;"><span>    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>    author <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(Author, on_delete<span style="color:#f92672">=</span>models<span style="color:#f92672">.</span>CASCADE)
+</span></span></code></pre></div><p><strong>DirtyFieldsMixin</strong> — it’s a mixin from django-dirtyfields library.
+<em>“Dirty means that a field’s in-memory value is different to the saved value in the database”</em>. It allows us to identify which fields were modified.</p>
+<h1 id="signals">Signals</h1>
+<p>How to create a notification when a new Book object is created?
+The simplest way is to use <a href="https://docs.djangoproject.com/en/5.0/topics/signals/">Django Signals</a>:</p>
+<ul>
+<li>For example we will create a notifications app.</li>
+<li>Then signals.py</li>
+<li>Then register our signals.py in apps.py</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.apps <span style="color:#f92672">import</span> AppConfig
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NotificationsConfig</span>(AppConfig):
+</span></span><span style="display:flex;"><span>    default_auto_field <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;django.db.models.BigAutoField&#34;</span>
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;notifications&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ready</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Add signals.py.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">import</span> notifications.signals  <span style="color:#75715e"># noqa</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ImportError</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p>Inside signals.py we will catch post_save signal which is created by saving Book-model object.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.db.models.signals <span style="color:#f92672">import</span> post_save
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.dispatch <span style="color:#f92672">import</span> receiver
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> notifications.signals <span style="color:#f92672">import</span> notify
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> books.models <span style="color:#f92672">import</span> Book
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@receiver</span>(post_save, sender<span style="color:#f92672">=</span>Book)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_book_notification</span>(sender, instance, created, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Create a notification about the new book.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> created:
+</span></span><span style="display:flex;"><span>        notify<span style="color:#f92672">.</span>send(
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Who is sending this notification?</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># You may want to add a link to the author&#39;s profile</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># inside the notification.</span>
+</span></span><span style="display:flex;"><span>            sender<span style="color:#f92672">=</span>instance<span style="color:#f92672">.</span>creator,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># We are passing a Queryset of subscribers (list of User objects).</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># However, it may also be a User Group or a single User.</span>
+</span></span><span style="display:flex;"><span>            recipient<span style="color:#f92672">=</span>instance<span style="color:#f92672">.</span>author<span style="color:#f92672">.</span>subscribers<span style="color:#f92672">.</span>all(),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># A message we would like to send to users.</span>
+</span></span><span style="display:flex;"><span>            verb<span style="color:#f92672">=</span>(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;A new book released: </span><span style="color:#e6db74">{</span>instance<span style="color:#f92672">.</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74"> by&#34;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>instance<span style="color:#f92672">.</span>author<span style="color:#e6db74">}</span><span style="color:#e6db74">,&#34;</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># We will likely want to send a link to the new book to our users.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># &#34;Target&#34; is GenericForeignKey. In the database, </span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># it is stored as the ContentType ID and the object ID. </span>
+</span></span><span style="display:flex;"><span>            target<span style="color:#f92672">=</span>instance,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># There are several other fields,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># please refer to the documentation for more information.</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Let&#39;s assume that we want to notify users about </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># the release of a new chapter in book.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># The author is allowed to add only new chapters to the text field.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> instance<span style="color:#f92672">.</span>is_dirty():
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># is_dirty - is a method from the DirtyFieldsMixin class.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Allowing us to verify whether or not any changes</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># have been made to an object.</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Check if the text field has changed.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#f92672">in</span> instance<span style="color:#f92672">.</span>get_dirty_fields():
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># get_dirty_fields() - is also a method of the DirtyFieldsMixin class.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># That allows us to access data that has been changed.</span>
+</span></span><span style="display:flex;"><span>            notify<span style="color:#f92672">.</span>send(
+</span></span><span style="display:flex;"><span>                sender<span style="color:#f92672">=</span>instance<span style="color:#f92672">.</span>creator,
+</span></span><span style="display:flex;"><span>                recipient<span style="color:#f92672">=</span>instance<span style="color:#f92672">.</span>author<span style="color:#f92672">.</span>subscribers<span style="color:#f92672">.</span>all(),
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># We are creating an almost identical notification,</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># with the only difference being that</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># the notification message has been changed.</span>
+</span></span><span style="display:flex;"><span>                verb<span style="color:#f92672">=</span>(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;New chapter relesed: </span><span style="color:#e6db74">{</span>instance<span style="color:#f92672">.</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; by </span><span style="color:#e6db74">{</span>instance<span style="color:#f92672">.</span>author<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>),
+</span></span><span style="display:flex;"><span>                target<span style="color:#f92672">=</span>instance,
+</span></span><span style="display:flex;"><span>            )
+</span></span></code></pre></div><h1 id="drf">DRF</h1>
+<p>Now we want to create API endpoints for these notifications.</p>
+<h2 id="viewset">Viewset:</h2>
+<p><code>notifications_view.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> rest_framework <span style="color:#f92672">import</span> status, viewsets
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> rest_framework.decorators <span style="color:#f92672">import</span> action
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> rest_framework.response <span style="color:#f92672">import</span> Response
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> api.v1.serializers.notifications_serializer <span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    MarkAllAsReadSerializer,
+</span></span><span style="display:flex;"><span>    NotificationSerializer,
+</span></span><span style="display:flex;"><span>    UnseenSerializer,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NotificationViewSet</span>(viewsets<span style="color:#f92672">.</span>ModelViewSet):
+</span></span><span style="display:flex;"><span>    serializer_class <span style="color:#f92672">=</span> NotificationSerializer
+</span></span><span style="display:flex;"><span>    http_method_names <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;patch&#34;</span>, <span style="color:#e6db74">&#34;head&#34;</span>, <span style="color:#e6db74">&#34;options&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Personalized unread notification list output.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>notifications<span style="color:#f92672">.</span>unread()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># empty PATCH request to ./notification/&lt;id&gt;/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partial_update</span>(self, request, pk):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Mark the notification as read.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        notification <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_object()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>user <span style="color:#f92672">!=</span> notification<span style="color:#f92672">.</span>recipient:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Response(
+</span></span><span style="display:flex;"><span>                {<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;The notification does not belong to the user.&#34;</span>},
+</span></span><span style="display:flex;"><span>                status<span style="color:#f92672">=</span>status<span style="color:#f92672">.</span>HTTP_403_FORBIDDEN,
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>        notification<span style="color:#f92672">.</span>mark_as_read()
+</span></span><span style="display:flex;"><span>        serializer <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_serializer(notification)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response(serializer<span style="color:#f92672">.</span>data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@action</span>(
+</span></span><span style="display:flex;"><span>        methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;get&#34;</span>],
+</span></span><span style="display:flex;"><span>        detail<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>        serializer_class<span style="color:#f92672">=</span>MarkAllAsReadSerializer
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mark_all_as_read</span>(self, request):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Mark all user notifications as read.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        request<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>notifications<span style="color:#f92672">.</span>mark_all_as_read()
+</span></span><span style="display:flex;"><span>        serializer <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_serializer({})
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response(serializer<span style="color:#f92672">.</span>data)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Instead of creating notifications via websockets,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># we can make regular requests to ./notification/unseen/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># to get to know about the new notification.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@action</span>(methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;get&#34;</span>], detail<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, serializer_class<span style="color:#f92672">=</span>UnseenSerializer)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unseen</span>(self, request):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;The number of unread notifications.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        unread_count <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>notifications<span style="color:#f92672">.</span>unread()<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>        serializer <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_serializer({<span style="color:#e6db74">&#34;unseen&#34;</span>: unread_count})
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Response(serializer<span style="color:#f92672">.</span>data)
+</span></span></code></pre></div><h2 id="serializers">Serializers:</h2>
+<p><code>notifications_serializer.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> notifications.models <span style="color:#f92672">import</span> Notification
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> rest_framework <span style="color:#f92672">import</span> serializers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NotificationSerializer</span>(serializers<span style="color:#f92672">.</span>ModelSerializer):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Notification Serializer.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Notification recipient User id.</span>
+</span></span><span style="display:flex;"><span>    recipient_id <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>IntegerField(
+</span></span><span style="display:flex;"><span>        read_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;recipient.id&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Notification sender User id.</span>
+</span></span><span style="display:flex;"><span>    actor_id <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>IntegerField(read_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;actor.id&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># This notification about a book is marked using the class name &#39;Book&#39;.</span>
+</span></span><span style="display:flex;"><span>    target_content_type <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>CharField(
+</span></span><span style="display:flex;"><span>        source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;target.__class__.__name__&#34;</span>, read_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Book id</span>
+</span></span><span style="display:flex;"><span>    target_object_id <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>IntegerField(read_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+</span></span><span style="display:flex;"><span>        model <span style="color:#f92672">=</span> Notification
+</span></span><span style="display:flex;"><span>        fields <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;id&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;verb&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;unread&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;target_object_id&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;target_content_type&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;timestamp&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;recipient_id&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;actor_id&#34;</span>,
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnseenSerializer</span>(serializers<span style="color:#f92672">.</span>Serializer):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Serializer of the number of unread notifications.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    unseen <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>IntegerField()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MarkAllAsReadSerializer</span>(serializers<span style="color:#f92672">.</span>Serializer):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Serialiser to mark all user notifications as read.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    message <span style="color:#f92672">=</span> serializers<span style="color:#f92672">.</span>CharField(
+</span></span><span style="display:flex;"><span>        default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;All notifications are marked as read.&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><h1 id="thanks-for-reading">Thanks for reading!</h1>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    
+<h1 class="about__title">Miron Sadykov</h1>
+<p class="about__description">Python backend developer</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://github.com/Reagent992" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://t.me/Rea_MISD" rel="me" aria-label="telegram" title="telegram"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:MironSadykov@yandex.ru" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://www.linkedin.com/in/miron-sadykov/" rel="me" aria-label="Linked in" title="Linked in"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://twitter.com/MironSadykov" rel="me" aria-label="twitter" title="twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    <p>It&#39;s my first article, i wrote it after tying to implement notifications on my first hackathon.</p>
+    
+        <p>
+            By Sadykov Miron, 
+            2024-06-07
+        </p>
+    
+
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <br />
+  <span class="active"><b></b></span><br />
+  
+  
+  
+  
+</p><p class="copyright"></p>
+<p class="advertisement">Powered by <a href="https://gohugo.io/">hugo</a> and <a href="https://github.com/joeroe/risotto">risotto</a>.</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,44 @@
+baseURL = 'https://reagent992.github.io/'
+languageCode = 'en'
+DefaultContentLanguage = "en"
+title = "Personal page"
+theme = 'risotto'
+# https://risotto.joeroe.io/
+# https://github.com/joeroe/risotto
+
+# Automatically add content sections to main menu
+sectionPagesMenu = 'main'
+
+[params.about]
+
+title = "Miron Sadykov"
+description = "Python backend developer"
+
+# Sidebar: social links
+# Available icon sets:
+# * FontAwesome 6 <https://fontawesome.com/> ('fa-brands', 'fa-normal', or 'fa-solid' for brands)
+# * Academicons <https://jpswalsh.github.io/academicons> ('ai ai-')
+[[params.socialLinks]]
+icon = "fa-brands fa-github"
+title = "GitHub"
+url = "https://github.com/Reagent992"
+
+[[params.socialLinks]]
+icon = "fa-brands fa-telegram"
+title = "telegram"
+url = "https://t.me/Rea_MISD"
+
+[[params.socialLinks]]
+icon = "fa-solid fa-envelope"
+title = "Email"
+url = "mailto:MironSadykov@yandex.ru"
+
+[[params.socialLinks]]
+icon = "fa-brands fa-linkedin"
+title = "Linked in"
+url = "https://www.linkedin.com/in/miron-sadykov/"
+
+[[params.socialLinks]]
+icon = "fa-brands fa-twitter"
+title = "twitter"
+url = "https://twitter.com/MironSadykov"
