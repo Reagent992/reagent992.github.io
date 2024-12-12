@@ -13,8 +13,10 @@ title = 'cv'
 - 💼 Linked in: [https://www.linkedin.com/in/miron-sadykov/](https://www.linkedin.com/in/miron-sadykov/)
 
 # Experience
+
 |             |                                                                                                |
 | ----------- | ---------------------------------------------------------------------------------------------- |
+| PET-project | [async_rutube_downloader](https://github.com/Reagent992/async_rutube_downloader)               |
 | PET-project | [e-shop](https://github.com/Reagent992/stamps)                                                 |
 | hackathon   | [CMS for yandex ambassadors](https://github.com/Lozhkin-pa/hackathon-crm-ambassadors)          |
 | hackathon   | [yandex-alfa-bank](https://github.com/Reagent992/ipr-hackathon-yandex-alfa?tab=readme-ov-file) |
