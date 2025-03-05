@@ -38,7 +38,3 @@ icon = "fa-brands fa-linkedin"
 title = "Linked in"
 url = "https://www.linkedin.com/in/miron-sadykov/"
 
-[[params.socialLinks]]
-icon = "fa-brands fa-twitter"
-title = "twitter"
-url = "https://twitter.com/MironSadykov"
