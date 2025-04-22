@@ -95,6 +95,16 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$open <span style="color:#f92672">=</span> ~/.config/hypr/scripts/open.sh
 </span></span><span style="display:flex;"><span>bind <span style="color:#f92672">=</span> SUPER, O, exec, $open obsidian <span style="color:#ae81ff">4</span>
 </span></span><span style="display:flex;"><span>bind <span style="color:#f92672">=</span> SUPER, A, exec, $open anki     <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h2 id="lock-screen-and-enable-english-layout-at-the-same-time">Lock screen and enable English layout at the same time.</h2>
+<ul>
+<li>I use waylock. Replace it with your desired locker.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># .config/hypr/hypridle.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define a command to switch to the English keyboard layout</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$english_layot</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">hyprctl switchxkblayout keyd-virtual-keyboard 0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">general {</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lock_cmd</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">$english_layot; pidof waylock || $waylock_start</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">...</span>
 </span></span></code></pre></div>
     </div>
     <footer class="content__footer"></footer>
