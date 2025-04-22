@@ -48,3 +48,15 @@ $open = ~/.config/hypr/scripts/open.sh
 bind = SUPER, O, exec, $open obsidian 4
 bind = SUPER, A, exec, $open anki     5
 ```
+
+## Lock screen and enable English layout at the same time.
+- I use waylock. Replace it with your desired locker.
+```ini
+# .config/hypr/hypridle.conf
+# Define a command to switch to the English keyboard layout
+$english_layot = hyprctl switchxkblayout keyd-virtual-keyboard 0
+general {
+    lock_cmd = $english_layot; pidof waylock || $waylock_start
+...
+ ``` 
+
