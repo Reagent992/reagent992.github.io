@@ -1,7 +1,7 @@
 +++
 date = '2025-06-29T13:27:35+03:00'
-draft = false
-title = 'Everforest_theme'
+draft = true
+title = 'Everforest'
 author = "Sadykov Miron"
 toc = true
 description = 'How i use everforest theme'

@@ -11,4 +11,5 @@
 ## Hugo cheatsheet for me
 
 ```bash
+hugo server -D         # Run local hugo and serve `draft = true` pages
 ```
