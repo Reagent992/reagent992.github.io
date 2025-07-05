@@ -1,6 +1,6 @@
 +++
 date = '2025-04-17T15:03:16+03:00'
-draft = false
+draft = true
 title = 'How to make obsidian.nvim plugin less opinionated'
 author = "Sadykov Miron"
 +++
@@ -9,8 +9,8 @@ I prefer simple Obsidian and don't use any note taking systems.
 **obsidian.nvim** is a great plugin, but it enforces the Zettelkasten method by default.  
 I spent about an hour customizing the configuration to remove that and make it behave more like plain Obsidian.
 
-
 Since I use **LazyVim**, my plugin files follow its structure:
+
 ```lua
 -- ./lua/plugins/obsidian-nvim.lua
 -- https://github.com/obsidian-nvim/obsidian.nvim

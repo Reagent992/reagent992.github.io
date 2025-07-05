@@ -1,13 +1,22 @@
-baseURL = 'https://reagent992.github.io/'
-languageCode = 'en'
-DefaultContentLanguage = "en"
-title = "Personal page"
-theme = 'risotto'
 # https://risotto.joeroe.io/
 # https://github.com/joeroe/risotto
 
+baseURL = 'https://reagent992.github.io/'
+title = "Personal page"
+theme = 'risotto'
+copyright = ''
+languageCode = "en"
+DefaultContentLanguage = "en"
+
 # Automatically add content sections to main menu
 sectionPagesMenu = 'main'
+
+[params.theme]
+palette = "base16-dark"
+# palette = "base16-everforest"
+
+[pagination]
+pagerSize = 3
 
 [params.about]
 
@@ -37,4 +46,3 @@ url = "mailto:MironSadykov@yandex.ru"
 icon = "fa-brands fa-linkedin"
 title = "Linked in"
 url = "https://www.linkedin.com/in/miron-sadykov/"
-
