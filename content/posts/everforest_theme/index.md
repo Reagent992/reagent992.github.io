@@ -1,6 +1,6 @@
 +++
 date = '2025-06-29T13:27:35+03:00'
-draft = true
+draft = false
 title = 'Everforest'
 author = "Sadykov Miron"
 toc = true
