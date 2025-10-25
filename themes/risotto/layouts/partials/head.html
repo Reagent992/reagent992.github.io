@@ -2,6 +2,7 @@
 {{ with .Site.Params.about }}<meta name="description" content="{{ .description }}">{{ end }}
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", "}}{{ end }}" />
 <meta charset="UTF-8"/>
 {{ if .Site.Params.noindex }}<meta name="robots" content="noindex" /> {{ end }}
 
