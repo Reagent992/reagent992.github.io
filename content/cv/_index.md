@@ -4,8 +4,8 @@ draft = false
 title = 'cv'
 +++
 
-
 ## Contact Information
+
 |           |                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------- |
 | Telegram  | [https://t.me/Rea_MISD](https://t.me/Rea_MISD)                                           |
@@ -18,9 +18,12 @@ title = 'cv'
 |             |                                                                                                |
 | ----------- | ---------------------------------------------------------------------------------------------- |
 | PET-project | [async_rutube_downloader](https://github.com/Reagent992/async_rutube_downloader)               |
-| PET-project | [stamps e-shop](https://github.com/Reagent992/stamps)                                                 |
+| PET-project | [stamps e-shop](https://github.com/Reagent992/stamps)                                          |
+| PET-project | [Anki TTS extension](https://github.com/Reagent992/anki_kokoro_extension)                      |
+| PET-project | [Various add-ons for Hyprland](https://github.com/Reagent992/hyprland_scripts)                 |
 | hackathon   | [CMS for yandex ambassadors](https://github.com/Lozhkin-pa/hackathon-crm-ambassadors)          |
 | hackathon   | [yandex-alfa-bank](https://github.com/Reagent992/ipr-hackathon-yandex-alfa?tab=readme-ov-file) |
+| hackathon   | [Telegram bot for "i_hear_you" project](https://github.com/Yandex-Hackaton/ihearyou)           |
 | Course      | [big 9 months course by yandex practicum](https://practicum.yandex.ru/backend-developer/)      |
 
 ## Education
@@ -36,17 +39,19 @@ title = 'cv'
 | Book   | Test-Driven Development with Django by Kevin Harvey                            |
 | Book   | Python Concurrency with asyncio by Matthew Fowler                              |
 
-
 ## Skills
 
 - Python
 - Django and DRF
+- aiogram
+- fastapi
 - Docker
 - Git
 - asyncio
 - SQL
-- Celery
+- Celery, playwright
 
 ## Hobby
+
 - [dogs](https://t.me/jillstingraj)
 - diy
