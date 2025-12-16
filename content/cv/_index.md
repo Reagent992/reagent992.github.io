@@ -17,14 +17,15 @@ title = 'cv'
 
 |             |                                                                                                |
 | ----------- | ---------------------------------------------------------------------------------------------- |
-| PET-project | [async_rutube_downloader](https://github.com/Reagent992/async_rutube_downloader)               |
-| PET-project | [stamps e-shop](https://github.com/Reagent992/stamps)                                          |
-| PET-project | [Anki TTS extension](https://github.com/Reagent992/anki_kokoro_extension)                      |
-| PET-project | [Various add-ons for Hyprland](https://github.com/Reagent992/hyprland_scripts)                 |
+| Start-up    | Stroitam(November 2025 - now)                                                                  |
+| Course      | [big 9 months course by yandex practicum](https://practicum.yandex.ru/backend-developer/)      |
 | hackathon   | [CMS for yandex ambassadors](https://github.com/Lozhkin-pa/hackathon-crm-ambassadors)          |
 | hackathon   | [yandex-alfa-bank](https://github.com/Reagent992/ipr-hackathon-yandex-alfa?tab=readme-ov-file) |
 | hackathon   | [Telegram bot for "i_hear_you" project](https://github.com/Yandex-Hackaton/ihearyou)           |
-| Course      | [big 9 months course by yandex practicum](https://practicum.yandex.ru/backend-developer/)      |
+| PET-project | [async_rutube_downloader](https://github.com/Reagent992/async_rutube_downloader)               |
+| PET-project | [Anki TTS extension](https://github.com/Reagent992/anki_kokoro_extension)                      |
+| PET-project | [stamps e-shop](https://github.com/Reagent992/stamps)                                          |
+| PET-project | [Various add-ons for Hyprland](https://github.com/Reagent992/hyprland_scripts)                 |
 
 ## Education
 
@@ -42,14 +43,12 @@ title = 'cv'
 ## Skills
 
 - Python
-- Django and DRF
-- aiogram
-- fastapi
+- FastAPI, Django(DRF)
+- Aiogram
 - Docker
+- SQL, PostgreSQL
+- Celery, Playwright
 - Git
-- asyncio
-- SQL
-- Celery, playwright
 
 ## Hobby
 
