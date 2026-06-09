@@ -5,7 +5,7 @@ baseURL = 'https://reagent992.github.io/'
 title = "Personal page"
 theme = 'risotto'
 copyright = ''
-languageCode = "en"
+locale = "en"
 DefaultContentLanguage = "en"
 
 # Automatically add content sections to main menu

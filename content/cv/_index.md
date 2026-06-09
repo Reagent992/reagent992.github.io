@@ -43,11 +43,10 @@ title = 'cv'
 ## Skills
 
 - Python
-- FastAPI, Django(DRF)
-- Aiogram
+- FastAPI, Django(DRF), Aiogram
 - Docker
-- SQL, PostgreSQL
-- Celery, Playwright
+- SQL, PostgreSQL, Kafka
+- Celery, FastStream, Playwright
 - Git
 
 ## Hobby
