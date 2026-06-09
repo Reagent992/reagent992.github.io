@@ -6,7 +6,7 @@ author = "Sadykov Miron"
 +++
 
 I prefer simple Obsidian and don't use any note taking systems.
-**obsidian.nvim** is a great plugin, but it enforces the Zettelkasten method by default.  
+**obsidian.nvim** is a great plugin, but it enforces the Zettelkasten method by default.
 I spent about an hour customizing the configuration to remove that and make it behave more like plain Obsidian.
 
 Since I use **LazyVim**, my plugin files follow its structure:
