@@ -163,7 +163,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 ```
 
-## Сериализаторы:
+## Сериализаторы
+
 `notifications_serializer.py`
 
 ```python

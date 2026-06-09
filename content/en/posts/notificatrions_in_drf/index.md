@@ -14,7 +14,6 @@ links: [django-notifications](https://github.com/django-notifications/django-not
 
 > Let’s imagine we are creating an API for a website where authors can publish their books. Our users can follow authors and they will be notified about every new book published by their favorite author.
 
-
 # Installation
 
 ```python
@@ -28,7 +27,7 @@ INSTALLED_APPS = [
     'notifications',
     ...
 ]
-# create notifications db table 
+# create notifications db table
 python manage.py migrate
 ```
 
@@ -103,22 +102,22 @@ def create_book_notification(sender, instance, created, **kwargs):
                   f"{instance.author},"),
 
             # We will likely want to send a link to the new book to our users.
-            # "Target" is GenericForeignKey. In the database, 
-            # it is stored as the ContentType ID and the object ID. 
+            # "Target" is GenericForeignKey. In the database,
+            # it is stored as the ContentType ID and the object ID.
             target=instance,
 
             # There are several other fields,
             # please refer to the documentation for more information.
         )
 
-    # Let's assume that we want to notify users about 
+    # Let's assume that we want to notify users about
     # the release of a new chapter in book.
     # The author is allowed to add only new chapters to the text field.
     elif instance.is_dirty():
         # is_dirty - is a method from the DirtyFieldsMixin class.
         # Allowing us to verify whether or not any changes
         # have been made to an object.
-        
+
         # Check if the text field has changed.
         if "text" in instance.get_dirty_fields():
         # get_dirty_fields() - is also a method of the DirtyFieldsMixin class.
@@ -134,6 +133,7 @@ def create_book_notification(sender, instance, created, **kwargs):
                 target=instance,
             )
 ```
+
 # DRF
 
 Now we want to create API endpoints for these notifications.
@@ -197,7 +197,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 ```
 
-## Serializers:
+## Serializers
+
 `notifications_serializer.py`
 
 ```python
