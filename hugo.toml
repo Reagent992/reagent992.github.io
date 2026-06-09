@@ -10,31 +10,31 @@ DefaultContentLanguage = "en"
 sectionPagesMenu = 'main'
 
 [languages]
-  [languages.en]
-    languageName = "English"
-    title = "Personal page"
-    locale = "en"
-    weight = 1
-    contentDir = "content/en"
+[languages.en]
+languageName = "English"
+title = "Personal page"
+locale = "en"
+weight = 1
+contentDir = "content/en"
 
-    [languages.en.params.about]
-      title = "Miron Sadykov"
-      description = "Python backend developer"
+[languages.en.params.about]
+title = "Miron Sadykov"
+description = "Python backend developer"
 
-  [languages.ru]
-    languageName = "Русский"
-    title = "Личная страница"
-    locale = "ru"
-    weight = 2
-    contentDir = "content/ru"
+[languages.ru]
+languageName = "Русский"
+title = "Личная страница"
+locale = "ru"
+weight = 2
+contentDir = "content/ru"
 
-    [languages.ru.params.about]
-      title = "Мирон Садыков"
-      description = "Python backend разработчик"
+[languages.ru.params.about]
+title = "Мирон Садыков"
+description = "Python backend разработчик"
 
 [params.theme]
-palette = "base16-dark"
-# palette = "base16-everforest"
+# palette = "base16-dark"
+palette = "base16-everforest"
 
 [pagination]
 pagerSize = 3
