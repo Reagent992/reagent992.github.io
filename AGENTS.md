@@ -19,7 +19,8 @@ hugo --gc --minify      # production build → ./public
 - Front matter uses TOML (`+++`), new posts default `draft = true`
 - Archetype: `archetypes/default.md` — sets `author = "Sadykov Miron"`, `toc = true`
 - Posts go in `content/posts/`; sections use `_index.md`
-- Theme: [risotto](https://github.com/joeroe/risotto) (vendored in `themes/risotto/`, no submodule)
+- Theme: [risotto](https://github.com/joeroe/risotto) (git submodule, tag v0.5.1)
+- Custom overrides live in root `layouts/` and `static/` — they shadow theme files with same paths
 - Config: `hugo.toml` (TOML, not YAML)
 
 ## Deployment
