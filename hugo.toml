@@ -2,14 +2,27 @@
 # https://github.com/joeroe/risotto
 
 baseURL = 'https://reagent992.github.io/'
-title = "Personal page"
 theme = 'risotto'
 copyright = ''
-locale = "en"
 DefaultContentLanguage = "en"
 
 # Automatically add content sections to main menu
 sectionPagesMenu = 'main'
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Personal page"
+    locale = "en"
+    weight = 1
+    contentDir = "content/en"
+
+  [languages.ru]
+    languageName = "Русский"
+    title = "Личная страница"
+    locale = "ru"
+    weight = 2
+    contentDir = "content/ru"
 
 [params.theme]
 palette = "base16-dark"
