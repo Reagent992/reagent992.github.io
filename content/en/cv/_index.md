@@ -44,7 +44,7 @@ title = 'cv'
 
 - Python
 - FastAPI, Django(DRF), Aiogram
-- Docker
+- Docker, nginx, ansible
 - SQL, PostgreSQL, Kafka
 - Celery, FastStream, Playwright
 - Git
