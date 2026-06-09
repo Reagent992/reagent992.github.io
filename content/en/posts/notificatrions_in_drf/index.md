@@ -14,7 +14,7 @@ links: [django-notifications](https://github.com/django-notifications/django-not
 
 > Let’s imagine we are creating an API for a website where authors can publish their books. Our users can follow authors and they will be notified about every new book published by their favorite author.
 
-# Installation
+## Installation
 
 ```python
 # install libs
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 python manage.py migrate
 ```
 
-# Models
+## Models
 
 We have some default example models:
 
@@ -48,7 +48,7 @@ class Book(models.Model, DirtyFieldsMixin):
 **DirtyFieldsMixin** — it’s a mixin from django-dirtyfields library.
 *“Dirty means that a field’s in-memory value is different to the saved value in the database”*. It allows us to identify which fields were modified.
 
-# Signals
+## Signals
 
 How to create a notification when a new Book object is created?
 The simplest way is to use [Django Signals](https://docs.djangoproject.com/en/5.0/topics/signals/):
@@ -134,11 +134,11 @@ def create_book_notification(sender, instance, created, **kwargs):
             )
 ```
 
-# DRF
+## DRF
 
 Now we want to create API endpoints for these notifications.
 
-## Viewset:
+## Viewset
 
 `notifications_view.py`
 
@@ -251,4 +251,4 @@ class MarkAllAsReadSerializer(serializers.Serializer):
     )
 ```
 
-# Thanks for reading!
+## Thanks for reading

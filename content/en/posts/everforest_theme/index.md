@@ -18,7 +18,7 @@ keywords = ["Everforest", "everforest theme", "everforest hyprland", "everforest
 
 ![Color palette](./colors.png)
 
-```
+```text
 bg_dim #232a2e;
 bg0 #2d353b;
 bg1 #343f44;
@@ -65,7 +65,7 @@ My workspace example:
 
 > it's a simple one-color screen locker.
 
-```
+```text
 waylock -init-color 0x232A2E -input-color 0x2D353B -fail-color 0x543A48 -input-alt-color 0x232A2E -ignore-empty-password -fork-on-lock
 ```
 

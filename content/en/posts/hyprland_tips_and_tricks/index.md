@@ -9,9 +9,9 @@ author = "Sadykov Miron"
 
 - I use `SUPER-O` to launch my Obsidian vault on workspace 4.
 - This little script allows me to always open Obsidian with the same key combination, even if it's already running or moved to a different workspace.
-- https://github.com/Reagent992/hyprland_scripts/blob/master/docs/run_or_focus.md there is a code and readme.
+- <https://github.com/Reagent992/hyprland_scripts/blob/master/docs/run_or_focus.md> there is a code and readme.
 
-## Lock screen and enable English layout at the same time.
+## Lock screen and enable English layout at the same time
 
 - I use waylock. Replace it with your desired locker.
 

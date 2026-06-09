@@ -1,10 +1,4 @@
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
 MD013: false   # line length — не актуально для Hugo
-MD024: false   # duplicate headings
-MD025: false   # multiple top-level h1 — часто в технических постах
-MD026: false   # trailing punctuation in headings — норм для заголовков с : и !
-MD033: false   # inline HTML — нужно для Hugo
-MD034: false   # bare URLs — Hugo обрабатывает нормально
-MD040: false   # fenced blocks без языка — палитры и конфиги
-MD041: false   # first line heading — не обязателен
+MD033: false   # inline HTML — нужно для Hugo shortcodes

@@ -6,7 +6,7 @@ Personal Hugo site deployed to GitHub Pages.
 
 - Commit after every change with a meaningful message
 - Before committing, check `git status` and `git diff` — stage only needed files
-- Pre-commit: `prek run -a` (запускает markdownlint и базовые проверки)
+- Pre-commit: `prek run -a` (runs markdownlint and basic checks)
 
 ## Quick start
 

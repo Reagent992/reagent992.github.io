@@ -14,7 +14,7 @@ links: [django-notifications](https://github.com/django-notifications/django-not
 
 > Представим, что мы создаём API для сайта, где авторы могут публиковать свои книги. Наши пользователи могут подписываться на авторов и получать уведомления о каждой новой книге любимого автора.
 
-# Установка
+## Установка
 
 ```python
 # установка библиотек
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 python manage.py migrate
 ```
 
-# Модели
+## Модели
 
 У нас есть несколько стандартных примеров моделей:
 
@@ -48,7 +48,7 @@ class Book(models.Model, DirtyFieldsMixin):
 **DirtyFieldsMixin** — это миксин из библиотеки django-dirtyfields.
 *«Грязное означает, что значение поля в памяти отличается от сохранённого значения в базе данных»*. Это позволяет определить, какие поля были изменены.
 
-# Сигналы
+## Сигналы
 
 Как создать уведомление, когда создаётся новый объект Book?
 Самый простой способ — использовать [Django Signals](https://docs.djangoproject.com/en/5.0/topics/signals/):
@@ -106,11 +106,11 @@ def create_book_notification(sender, instance, created, **kwargs):
             )
 ```
 
-# DRF
+## DRF
 
 Теперь создадим API эндпоинты для этих уведомлений.
 
-## Viewset:
+## Viewset
 
 `notifications_view.py`
 
@@ -206,4 +206,4 @@ class MarkAllAsReadSerializer(serializers.Serializer):
     )
 ```
 
-# Спасибо за чтение!
+## Спасибо за чтение

@@ -9,7 +9,7 @@ author = "Sadykov Miron"
 
 - Я использую `SUPER-O` для запуска Obsidian на workspace 4.
 - Этот скрипт позволяет всегда открывать Obsidian одной и той же комбинацией, даже если он уже запущен или перемещён на другой workspace.
-- https://github.com/Reagent992/hyprland_scripts/blob/master/docs/run_or_focus.md — код и readme.
+- <https://github.com/Reagent992/hyprland_scripts/blob/master/docs/run_or_focus.md> — код и readme.
 
 ## Блокировка экрана с переключением на английскую раскладку
 
