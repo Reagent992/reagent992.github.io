@@ -1,0 +1,6 @@
+# https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+
+MD013: false  # line length — не актуально для Hugo контента
+MD024: false  # duplicate headings — нужно для FAQ/tabs
+MD033: false  # inline HTML — нужно для Hugo shortcodes
+MD041: false  # first line heading — не обязателен
