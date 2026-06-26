@@ -23,7 +23,6 @@ hugo --gc --minify      # production build → ./public
 - Sections use `_index.md`
 - Theme: [risotto](https://github.com/joeroe/risotto) (git submodule, tag v0.5.1)
 - Custom overrides live in root `layouts/` and `static/` — they shadow theme files with same paths
-- `tags` in front matter — Hugo taxonomy for grouping related posts; generates `/tags/` pages; display on post pages is automatic (see `layouts/_default/single.html`)
 - Config: `hugo.toml` (TOML, not YAML)
 
 ## Deployment

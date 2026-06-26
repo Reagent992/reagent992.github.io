@@ -5,7 +5,6 @@ title = 'Everforest'
 author = "Sadykov Miron"
 toc = true
 description = 'Как я использую тему Everforest'
-tags = ["everforest", "hyprland", "ncspot", "waybar", "waylock"]
 +++
 
 > Это цветовая схема для различных приложений.

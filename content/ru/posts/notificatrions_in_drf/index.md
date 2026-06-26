@@ -2,7 +2,6 @@
 date = '2024-06-07T15:08:45+03:00'
 draft = false
 title = 'Как создать уведомления в Django(DRF) с помощью библиотек django-notifications-hq и django-dirtyfields'
-tags = ["django"]
 author = "Sadykov Miron"
 description = "Это моя первая статья, я написал её после попытки внедрить уведомления на своём первом хакатоне."
 +++

@@ -4,6 +4,5 @@ draft = true
 title = 'FastAPI Error Handling'
 author = "Sadykov Miron"
 toc = true
-tags = ["fastapi", "python", "pydantic", "layered architecture"]
 description = ''
 +++
