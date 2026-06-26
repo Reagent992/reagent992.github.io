@@ -3,6 +3,7 @@ date = '2025-04-19T21:52:25+03:00'
 draft = false
 title = 'Hyprland tips and tricks'
 author = "Sadykov Miron"
+tags = ["hyprland", "linux"]
 +++
 
 ## Smart App Opener

@@ -3,6 +3,7 @@ date = '2025-04-17T15:03:16+03:00'
 draft = true
 title = 'How to make obsidian.nvim plugin less opinionated'
 author = "Sadykov Miron"
+tags = ["obsidian", "neovim"]
 +++
 
 I prefer simple Obsidian and don't use any note taking systems.

@@ -3,6 +3,7 @@ date = '2025-04-17T15:03:16+03:00'
 draft = true
 title = 'Как сделать obsidian.nvim менее навязчивым'
 author = "Sadykov Miron"
+tags = ["obsidian", "neovim"]
 +++
 
 Я предпочитаю простой Obsidian и не использую никаких систем заметок.

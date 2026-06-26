@@ -1,0 +1,19 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  font-size: 0.85em;
+  background: var(--bg2);
+  border-radius: 3px;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.tag:hover {
+  background: var(--bg3);
+}
