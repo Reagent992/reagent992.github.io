@@ -24,7 +24,7 @@ title = 'резюме'
 | Хакатон     | [Telegram бот для проекта "i_hear_you"](https://github.com/Yandex-Hackaton/ihearyou)            |
 | PET-project | [async_rutube_downloader](https://github.com/Reagent992/async_rutube_downloader)                |
 | PET-project | [Anki TTS extension](https://github.com/Reagent992/anki_kokoro_extension)                       |
-| PET-project | [Магазин марок](https://github.com/Reagent992/stamps)                                           |
+| PET-project | [Интернет-Магазин печатей](https://github.com/Reagent992/stamps)                                |
 | PET-project | [Разные аддоны для Hyprland](https://github.com/Reagent992/hyprland_scripts)                    |
 
 ## Образование

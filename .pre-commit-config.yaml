@@ -11,4 +11,4 @@ repos:
     rev: v0.44.0
     hooks:
       - id: markdownlint
-        args: [--ignore, public/]
+        args: [-f, --ignore, public/]

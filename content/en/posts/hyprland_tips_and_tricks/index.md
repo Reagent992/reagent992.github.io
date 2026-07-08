@@ -1,6 +1,6 @@
 +++
 date = '2025-04-19T21:52:25+03:00'
-draft = false
+draft = true
 title = 'Hyprland tips and tricks'
 author = "Sadykov Miron"
 +++
